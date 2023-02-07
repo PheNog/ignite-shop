@@ -4,6 +4,7 @@ import type { AppProps } from 'next/app'
 import Image from 'next/image'
 import { CartProvider } from 'use-shopping-cart'
 import logoImg from '../assets/logo.svg'
+import cartGray from '../assets/cartGray.svg'
 
 globalStyles()
 
@@ -25,6 +26,9 @@ export default function App({ Component, pageProps }: AppProps) {
       <Container>
         <Header>
           <Image alt='' src={logoImg} />
+          <button>
+            <Image alt='' src={cartGray} />
+          </button>
         </Header>
         <Component {...pageProps} />
       </Container>

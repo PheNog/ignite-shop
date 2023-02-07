@@ -30,7 +30,7 @@ export const Product = styled('a', {
         bottom: '0.25rem',
         left: '0.25rem',
         right: '0.25rem',
-        padding: '2rem',
+        padding: '1.5rem',
 
         borderRadius: 6,
 
@@ -44,6 +44,12 @@ export const Product = styled('a', {
         opacity: 0,
         transition: 'all 0.2s ease-in-out',
 
+        div: {
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '0.25rem'
+        },
+
         strong: {
             fontSize: '$lg',
             color: '$gray100'
@@ -53,13 +59,25 @@ export const Product = styled('a', {
             fontSize: '$xl',
             fontWeight: 'bold',
             color: '$green300'
+        },
+
+        button: {
+            width: 48,
+            height: 48,
+            background: '$green500',
+            borderRadius: 6,
+            border: 0,
+            cursor: 'pointer'
         }
     },
 
     '&:hover': {
         footer: {
             transform: 'translateY(0%)',
-            opacity: 1
+            opacity: 1,
+        },
+        button: {
+            background: '$green300'
         }
     }
 

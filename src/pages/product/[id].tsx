@@ -6,7 +6,6 @@ import Stripe from 'stripe';
 import axios from 'axios'
 import { useState } from 'react';
 import { useShoppingCart } from 'use-shopping-cart'
-
 import Head from 'next/head';
 
 interface ProductProps {
@@ -23,7 +22,8 @@ interface ProductProps {
 }
 
 export default function Product({ product }: ProductProps) {
-
+    
+    const { addItem, cartDetails } = useShoppingCart()
     const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false)
 
     async function handleBuyProduct() {
@@ -46,7 +46,6 @@ export default function Product({ product }: ProductProps) {
         // }
     }
 
-    const { addItem, cartDetails } = useShoppingCart()
     console.log("🚀 ~ file: [id].tsx:50 ~ Product ~ cartDetails", cartDetails)
     return (
         <>

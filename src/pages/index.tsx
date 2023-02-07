@@ -7,6 +7,7 @@ import { GetStaticProps } from "next";
 import Stripe from "stripe";
 import Link from "next/link";
 import Head from "next/head";
+import cartIcon from '../assets/cartIcon.svg'
 
 interface HomeProps {
   products: {
@@ -28,9 +29,9 @@ export default function Home({ products }: HomeProps) {
 
   return (
     <>
-    <Head>
-      <title>HOME | Ignite Shop</title>
-    </Head>
+      <Head>
+        <title>HOME | Ignite Shop</title>
+      </Head>
       <HomeContainer ref={sliderRef} className="keen-slider">
         {
           products.map((product) => {
@@ -43,8 +44,13 @@ export default function Home({ products }: HomeProps) {
                 <Product className="keen-slider__slide" >
                   <Image width={520} height={480} alt='' src={product.imageUrl} />
                   <footer>
-                    <strong>{product.name}</strong>
-                    <span>{product.price}</span>
+                    <div>
+                      <strong>{product.name}</strong>
+                      <span>{product.price}</span>
+                    </div>
+                    <button>
+                      <Image width={24} height={24} alt='' src={cartIcon} />
+                    </button>
                   </footer>
                 </Product>
               </Link>
