@@ -8,6 +8,7 @@ import Stripe from "stripe";
 import Link from "next/link";
 import Head from "next/head";
 import cartIcon from '../assets/cartIcon.svg'
+import { useShoppingCart } from "use-shopping-cart";
 
 interface HomeProps {
   products: {
@@ -26,6 +27,7 @@ export default function Home({ products }: HomeProps) {
       spacing: 48
     }
   })
+
 
   return (
     <>
@@ -59,7 +61,6 @@ export default function Home({ products }: HomeProps) {
         }
       </HomeContainer>
     </>
-
   )
 }
 

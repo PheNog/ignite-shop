@@ -3,8 +3,6 @@ import { ImageContainer, ProductContainer, ProductDetails } from '@/styles/pages
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Image from 'next/image';
 import Stripe from 'stripe';
-import axios from 'axios'
-import { useState } from 'react';
 import { useShoppingCart } from 'use-shopping-cart'
 import Head from 'next/head';
 
@@ -22,31 +20,18 @@ interface ProductProps {
 }
 
 export default function Product({ product }: ProductProps) {
-    
+
     const { addItem, cartDetails } = useShoppingCart()
-    const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false)
 
     async function handleBuyProduct() {
-        setIsCreatingCheckoutSession(true)
         const producData = {
             sku: product.id
         }
         addItem(product)
-        // try {
-        //     const response = await axios.post('/api/checkout', {
-        //         priceId: product.defaultPriceId
-        //     })
 
-        //     const { checkoutUrl } = response.data
-
-        //     window.location.href = checkoutUrl
-        // } catch (err) {
-        //     setIsCreatingCheckoutSession(false)
-        //     alert('falha ao redirecionar ao checkout!')
-        // }
     }
 
-    console.log("🚀 ~ file: [id].tsx:50 ~ Product ~ cartDetails", cartDetails)
+
     return (
         <>
             <Head>
@@ -61,10 +46,9 @@ export default function Product({ product }: ProductProps) {
                     <span> {product.price}</span>
                     <p> {product.description}</p>
                     <button
-                        disabled={isCreatingCheckoutSession}
                         onClick={handleBuyProduct}
                     >
-                        Comprar agora
+                        ADICIONAR AO CARRINHO
                     </button>
                 </ProductDetails>
             </ProductContainer>
