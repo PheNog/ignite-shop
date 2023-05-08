@@ -12,8 +12,8 @@ globalStyles()
 
 export default function App({ Component, pageProps }: AppProps) {
 
-  const stripeToken = String(process.env.STRIPE_SECRET_KEY)
-  console.log('SUCESSURL', `${process.env.NEXT_URL}/success?session_id={CHECKOUT_SESSION_ID}`)
+  const stripeToken = String(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY)
+  console.log('SUCESSURL', `${process.env.NEXT_PUBLIC_URL}/success?session_id={CHECKOUT_SESSION_ID}`)
 
   // console.log("🚀 ~ file: _app.tsx:17 ~ App ~ cartDetails:", cartDetails)
   return (
@@ -21,8 +21,8 @@ export default function App({ Component, pageProps }: AppProps) {
       mode="payment"
       cartMode="client-only"
       stripe={stripeToken}
-      successUrl={`http://localhost:3000/success?session_id={CHECKOUT_SESSION_ID}`}
-      cancelUrl={`http://localhost:3000/`}
+      successUrl={`${process.env.NEXT_PUBLIC_URL}/success?session_id={CHECKOUT_SESSION_ID}`}
+      cancelUrl={`${process.env.NEXT_PUBLIC_URL}`}
       currency="BRL"
       allowedCountries={['US', 'GB', 'CA', 'BR']}
       billingAddressCollection={true}

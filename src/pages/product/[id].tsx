@@ -3,6 +3,8 @@ import { ImageContainer, ProductContainer, ProductDetails } from '@/styles/pages
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Image from 'next/image';
 import Stripe from 'stripe';
+import axios from 'axios'
+import { useState } from 'react';
 import { useShoppingCart } from 'use-shopping-cart'
 import Head from 'next/head';
 
@@ -19,16 +21,16 @@ interface ProductProps {
     }
 }
 
-export default function Product({ product }: ProductProps) {
 
+export default function Product({ product }: ProductProps) {
+    const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false)
     const { addItem, cartDetails } = useShoppingCart()
 
-    async function handleBuyProduct() {
+    function handleAddToCart() {
         const producData = {
             sku: product.id
         }
         addItem(product)
-
     }
 
 
@@ -46,7 +48,7 @@ export default function Product({ product }: ProductProps) {
                     <span> {product.price}</span>
                     <p> {product.description}</p>
                     <button
-                        onClick={handleBuyProduct}
+                        onClick={handleAddToCart}
                     >
                         ADICIONAR AO CARRINHO
                     </button>

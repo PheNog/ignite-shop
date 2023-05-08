@@ -21,6 +21,8 @@ export const HeaderWithCart = () => {
     function openAndCloseCartPreview() {
         setIsOpen(!isOpen)
     }
+
+
     return (
         <Header>
             <Image alt='' src={logoImg} />

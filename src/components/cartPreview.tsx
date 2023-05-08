@@ -12,23 +12,11 @@ interface CartPreviewProps {
 
 export const CartPreview = ({ onClose }: CartPreviewProps) => {
     const {
-        // cartCount,
         cartDetails,
-        redirectToCheckout,
         clearCart, } = useShoppingCart()
     const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false)
 
-    async function handleBuyItems() {
-        setIsCreatingCheckoutSession(true)
-        const result = await redirectToCheckout()
-        if (result.error) {
-            setIsCreatingCheckoutSession(false)
-            alert('falha ao redirecionar ao checkout!')
-        }
-        setIsCreatingCheckoutSession(false)
-    };
-
-    const itemsInCart = []
+    const itemsInCart: any = []
     for (let product in cartDetails) {
         itemsInCart.push({ cartItem: cartDetails[product] })
     }
@@ -40,38 +28,58 @@ export const CartPreview = ({ onClose }: CartPreviewProps) => {
 
     const totalFormattedPrice = (totalPrice).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
-    
+    console.log("🚀 ~ file: cartpreview.tsx:95 ~ CartPreview ~ itemsInCart:", itemsInCart)
+    async function handleBuyItems() {
+        setIsCreatingCheckoutSession(true)
+
+        try {
+            const response = await axios.post('/api/checkout', {
+                itemsInCart
+            })
+
+            const { checkoutUrl } = response.data
+
+            window.location.href = checkoutUrl
+        } catch (err) {
+            setIsCreatingCheckoutSession(false)
+            alert('falha ao redirecionar ao checkout!')
+        }
+        setIsCreatingCheckoutSession(false)
+        clearCart()
+    }
 
 
-return (
-    <ContainerCartPreview>
-        <ContainerProductsAndTitle>
-            <RowClosePreview><button onClick={onClose}>X</button></RowClosePreview>
-            <TitlePreviewCart>Sacola de compras</TitlePreviewCart>
-            {itemsInCart.map(item => {
-                const cartItems = item.cartItem
-                return (
-                    <ItemMiniCart
-                        productImageURL={cartItems.image}
-                        productName={cartItems.name}
-                        productPrice={cartItems.price}
-                    />
-                )
-            })}
-        </ContainerProductsAndTitle>
-        <ContainerTotalAndCheckout>
-            <QuantityLabel>
-                <span>Quantidade</span>
-                <label>{itemsInCart.length} itens</label>
-            </QuantityLabel>
-            <TotalValue>
-                <span>Valor total</span>
-                <label> {totalFormattedPrice}</label>
-            </TotalValue>
-            <CheckoutButton
-                onClick={handleBuyItems}
-            >Finalizar compra</CheckoutButton>
-        </ContainerTotalAndCheckout>
-    </ContainerCartPreview>
-)
+    return (
+        <ContainerCartPreview>
+            <ContainerProductsAndTitle>
+                <RowClosePreview><button onClick={onClose}>X</button></RowClosePreview>
+                <TitlePreviewCart>Sacola de compras</TitlePreviewCart>
+                {itemsInCart.map((item: any) => {
+                    const cartItem = item.cartItem
+                    return (
+                        <ItemMiniCart
+                            id={cartItem.id}
+                            productImageURL={cartItem.image}
+                            productName={cartItem.name}
+                            productPrice={cartItem.price}
+                        />
+                    )
+                })}
+            </ContainerProductsAndTitle>
+            <ContainerTotalAndCheckout>
+                <QuantityLabel>
+                    <span>Quantidade</span>
+                    <label>{itemsInCart.length} itens</label>
+                </QuantityLabel>
+                <TotalValue>
+                    <span>Valor total</span>
+                    <label> {totalFormattedPrice}</label>
+                </TotalValue>
+                <CheckoutButton
+                    disabled={isCreatingCheckoutSession}
+                    onClick={handleBuyItems}
+                >Finalizar compra</CheckoutButton>
+            </ContainerTotalAndCheckout>
+        </ContainerCartPreview>
+    )
 }
