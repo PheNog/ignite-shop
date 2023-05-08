@@ -5,5 +5,4 @@ export const stripe = new Stripe(String(process.env.NEXT_PUBLIC_STRIPE_SECRET_KE
     appInfo: {
         name: 'Ignite Shop'
     }
-
 })

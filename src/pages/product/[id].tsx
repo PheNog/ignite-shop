@@ -23,16 +23,11 @@ interface ProductProps {
 
 
 export default function Product({ product }: ProductProps) {
-    const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false)
-    const { addItem, cartDetails } = useShoppingCart()
+    const { addItem } = useShoppingCart()
 
     function handleAddToCart() {
-        const producData = {
-            sku: product.id
-        }
         addItem(product)
     }
-
 
     return (
         <>

@@ -9,32 +9,29 @@ interface CartPreviewProps {
     onClose: () => void
 }
 
-
 export const CartPreview = ({ onClose }: CartPreviewProps) => {
     const {
         cartDetails,
         clearCart, } = useShoppingCart()
     const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false)
 
-    const itemsInCart: any = []
-    for (let product in cartDetails) {
-        itemsInCart.push({ cartItem: cartDetails[product] })
-    }
+    const cartItems = Object.values(cartDetails ?? {}).map(item => ({ cartItem: item }))
 
-    const totalPrice = itemsInCart.reduce(function (soma, objeto) {
-        const price = parseFloat(String(objeto.cartItem.price).replace(/[^\d.,]/g, '').replace(',', '.'));
-        return Number(soma + price);
-    }, 0);
+    const totalPrice = cartItems.reduce((sum, item) => {
+        console.log('TESTE', typeof item.cartItem)
+        const price = parseFloat(String(item.cartItem.price).replace(/[^\d.,]/g, '').replace(',', '.'));
+        return sum + price;
+    }, 0)
+
 
     const totalFormattedPrice = (totalPrice).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
-    console.log("🚀 ~ file: cartpreview.tsx:95 ~ CartPreview ~ itemsInCart:", itemsInCart)
     async function handleBuyItems() {
         setIsCreatingCheckoutSession(true)
 
         try {
             const response = await axios.post('/api/checkout', {
-                itemsInCart
+                cartItems
             })
 
             const { checkoutUrl } = response.data
@@ -54,8 +51,9 @@ export const CartPreview = ({ onClose }: CartPreviewProps) => {
             <ContainerProductsAndTitle>
                 <RowClosePreview><button onClick={onClose}>X</button></RowClosePreview>
                 <TitlePreviewCart>Sacola de compras</TitlePreviewCart>
-                {itemsInCart.map((item: any) => {
-                    const cartItem = item.cartItem
+                {cartItems.map((value) => {
+                    const cartItem = value.cartItem
+                    console.log("🚀 ~ file: cartpreview.tsx:77 ~ {cartItems.map ~ cartItem:", cartItem)
                     return (
                         <ItemMiniCart
                             id={cartItem.id}
@@ -69,7 +67,7 @@ export const CartPreview = ({ onClose }: CartPreviewProps) => {
             <ContainerTotalAndCheckout>
                 <QuantityLabel>
                     <span>Quantidade</span>
-                    <label>{itemsInCart.length} itens</label>
+                    <label>{cartItems.length} itens</label>
                 </QuantityLabel>
                 <TotalValue>
                     <span>Valor total</span>
@@ -78,7 +76,9 @@ export const CartPreview = ({ onClose }: CartPreviewProps) => {
                 <CheckoutButton
                     disabled={isCreatingCheckoutSession}
                     onClick={handleBuyItems}
-                >Finalizar compra</CheckoutButton>
+                >
+                    Finalizar compra
+                </CheckoutButton>
             </ContainerTotalAndCheckout>
         </ContainerCartPreview>
     )

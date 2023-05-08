@@ -1,11 +1,10 @@
 import { ContainerImage, ContainerMiniItems, PriceLabel, RemoveButton, TitlePriceAndRemoveContainer, TitleProduct } from "@/styles/components/cartPreview";
 import Image from "next/image";
-import camisetaTeste from "../assets/camisetas/1.png"
 import { useShoppingCart } from "use-shopping-cart";
 
 interface ItemMiniCartProps {
     id: string
-    productImageURL: string | undefined 
+    productImageURL: string | undefined
     productName: string
     productPrice: number
 
@@ -26,7 +25,7 @@ export function ItemMiniCart({ productImageURL, productName, productPrice, id }:
                 </TitleProduct>
                 <PriceLabel>{productPrice}</PriceLabel>
                 <RemoveButton
-                onClick={() => removeItem(id)}
+                    onClick={() => removeItem(id)}
                 >Remover</RemoveButton>
             </TitlePriceAndRemoveContainer>
         </ContainerMiniItems>

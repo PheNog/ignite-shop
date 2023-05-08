@@ -1,17 +1,17 @@
 import { ButtonX, Header, LabelCartLength } from "@/styles/pages/app"
 import Image from "next/image"
 import logoImg from '../assets/logo.svg'
-import cartGray from '../assets/cartGray.svg'
 import { useShoppingCart } from "use-shopping-cart"
 import { useState } from "react"
 import { CartPreview } from "./cartPreview"
+import Link from "next/link"
+
 
 export const HeaderWithCart = () => {
     const { cartDetails } = useShoppingCart()
     const [isOpen, setIsOpen] = useState(false)
     var cartLength = 0;
 
-    console.log("🚀 ~ file: header.tsx:9 ~ HeaderWithCart ~ cartDetails:", cartDetails)
     for (let itemCart in cartDetails) {
         if (cartDetails.hasOwnProperty(itemCart)) {
             cartLength++;
@@ -25,7 +25,12 @@ export const HeaderWithCart = () => {
 
     return (
         <Header>
-            <Image alt='' src={logoImg} />
+            <Link
+                href={`/`}
+                prefetch={false}
+            >
+                <Image alt='' src={logoImg} />
+            </ Link>
             <ButtonX onClick={openAndCloseCartPreview}>
                 <LabelCartLength>{cartLength}</LabelCartLength>
             </ButtonX>
