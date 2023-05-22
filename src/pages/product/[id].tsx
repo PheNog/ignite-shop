@@ -3,8 +3,6 @@ import { ImageContainer, ProductContainer, ProductDetails } from '@/styles/pages
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Image from 'next/image';
 import Stripe from 'stripe';
-import axios from 'axios'
-import { useState } from 'react';
 import { useShoppingCart } from 'use-shopping-cart'
 import Head from 'next/head';
 
@@ -20,7 +18,6 @@ interface ProductProps {
         currency: string
     }
 }
-
 
 export default function Product({ product }: ProductProps) {
     const { addItem } = useShoppingCart()

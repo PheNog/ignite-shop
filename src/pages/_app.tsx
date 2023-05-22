@@ -1,7 +1,7 @@
 import { globalStyles } from '@/styles/global'
 import { Container } from '@/styles/pages/app'
 import type { AppProps } from 'next/app'
-import { CartProvider, useShoppingCart } from 'use-shopping-cart'
+import { CartProvider } from 'use-shopping-cart'
 import { HeaderWithCart } from '@/components/header'
 
 

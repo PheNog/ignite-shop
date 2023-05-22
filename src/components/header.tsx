@@ -6,7 +6,6 @@ import { useState } from "react"
 import { CartPreview } from "./cartPreview"
 import Link from "next/link"
 
-
 export const HeaderWithCart = () => {
     const { cartDetails } = useShoppingCart()
     const [isOpen, setIsOpen] = useState(false)
@@ -21,7 +20,6 @@ export const HeaderWithCart = () => {
     function openAndCloseCartPreview() {
         setIsOpen(!isOpen)
     }
-
 
     return (
         <Header>

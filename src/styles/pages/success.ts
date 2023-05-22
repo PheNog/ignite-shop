@@ -44,7 +44,6 @@ export const ImageContainer = styled('div', {
     padding: '0.25rem',
     marginTop: '4rem',
 
-
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -52,4 +51,9 @@ export const ImageContainer = styled('div', {
     img: {
         objectFit: 'cover'
     }
+})
+
+export const ImagesContainer = styled('div', {
+    display: 'flex',
+    gap: '0.5rem',
 })

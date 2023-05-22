@@ -4,7 +4,6 @@ import { useShoppingCart } from "use-shopping-cart"
 import { useState } from "react"
 import axios from 'axios'
 
-
 interface CartPreviewProps {
     onClose: () => void
 }
@@ -18,11 +17,9 @@ export const CartPreview = ({ onClose }: CartPreviewProps) => {
     const cartItems = Object.values(cartDetails ?? {}).map(item => ({ cartItem: item }))
 
     const totalPrice = cartItems.reduce((sum, item) => {
-        console.log('TESTE', typeof item.cartItem)
         const price = parseFloat(String(item.cartItem.price).replace(/[^\d.,]/g, '').replace(',', '.'));
         return sum + price;
     }, 0)
-
 
     const totalFormattedPrice = (totalPrice).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
@@ -45,7 +42,6 @@ export const CartPreview = ({ onClose }: CartPreviewProps) => {
         clearCart()
     }
 
-
     return (
         <ContainerCartPreview>
             <ContainerProductsAndTitle>
@@ -53,7 +49,6 @@ export const CartPreview = ({ onClose }: CartPreviewProps) => {
                 <TitlePreviewCart>Sacola de compras</TitlePreviewCart>
                 {cartItems.map((value) => {
                     const cartItem = value.cartItem
-                    console.log("🚀 ~ file: cartpreview.tsx:77 ~ {cartItems.map ~ cartItem:", cartItem)
                     return (
                         <ItemMiniCart
                             id={cartItem.id}
