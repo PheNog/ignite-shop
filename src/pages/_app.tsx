@@ -4,7 +4,6 @@ import type { AppProps } from 'next/app'
 import { CartProvider } from 'use-shopping-cart'
 import { HeaderWithCart } from '@/components/header'
 
-
 globalStyles()
 
 export default function App({ Component, pageProps }: AppProps) {

@@ -1,4 +1,11 @@
-import { ContainerImage, ContainerMiniItems, PriceLabel, RemoveButton, TitlePriceAndRemoveContainer, TitleProduct } from "@/styles/components/cartPreview";
+import {
+    ContainerImage, 
+    ContainerMiniItems, 
+    PriceLabel, 
+    RemoveButton, 
+    TitlePriceAndRemoveContainer, 
+    TitleProduct
+} from "@/styles/components/cartPreview";
 import Image from "next/image";
 import { useShoppingCart } from "use-shopping-cart";
 
@@ -7,7 +14,6 @@ interface ItemMiniCartProps {
     productImageURL: string | undefined
     productName: string
     productPrice: number
-
 }
 
 export function ItemMiniCart({ productImageURL, productName, productPrice, id }: ItemMiniCartProps) {
@@ -18,7 +24,6 @@ export function ItemMiniCart({ productImageURL, productName, productPrice, id }:
             <ContainerImage>
                 <Image src={String(productImageURL)} width={101} height={93} alt='' />
             </ContainerImage>
-
             <TitlePriceAndRemoveContainer>
                 <TitleProduct>
                     {productName}

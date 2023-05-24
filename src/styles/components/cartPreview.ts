@@ -48,6 +48,7 @@ export const ContainerMiniItems = styled('div', {
     alignItems: 'center',
     marginBottom: '1.5rem'
 })
+
 export const ContainerImage = styled('div', {
     marginRight: '20px',
     background: 'linear-gradient(180deg, #1ea483 0%, #7465d4 100%)',

@@ -2,7 +2,7 @@ import { stripe } from "@/lib/stripe";
 import { NextApiRequest, NextApiResponse } from "next";
 import { CartEntry } from "use-shopping-cart/core";
 
-interface Request { 
+interface Request {
     cartItems: {
         cartItem: CartEntry
     }[]
@@ -17,19 +17,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const successUrl = `${process.env.NEXT_PUBLIC_URL}/success?session_id={CHECKOUT_SESSION_ID}`
     const cancelUrl = `${process.env.NEXT_PUBLIC_URL}/`
-
     const cartItemsFormatted = cartItems.map((product) => {
         const productFormatted = {
-            cartItem:{
-                price: product.cartItem.defaultPriceId,
-                quantity: 1,
-            }
+            price: product.cartItem.defaultPriceId,
+            quantity: 1,
         }
-    
         return productFormatted
     })
-    
-    console.log("🚀 ~ file: checkout.ts:16 ~ handler ~ cartItemsFormatted:", cartItemsFormatted)
+
     const checkoutSession = await stripe.checkout.sessions.create({
         success_url: successUrl,
         cancel_url: cancelUrl,
