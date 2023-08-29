@@ -61,7 +61,7 @@ Antes de começar, você vai precisar ter instalado em sua máquina as seguintes
 
 ##### Clone este repositório
 ```bash
-git clone https://github.com/PheNog/CoffeDelivery.git
+git clone https://github.com/PheNog/ignite-shop.git
 ```
 ##### Após clonar, acesse as pastas do projeto no terminal/cmd e instale as dependências
 ```bash
